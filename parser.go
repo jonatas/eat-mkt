@@ -7,35 +7,6 @@ import (
 	"strings"
 )
 
-func main() {
-	in := `first_name;last_name;username;email
-"John";"Pike";john;john@example.com
-Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
-Kin;Thompson;kin;kin@example.com
-Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
-"John";"Pike";john;john@example.com
-Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
-Kin;Thompson;kin;kin@example.com
-"John";"Pike";john;john@example.com
-Kin;Thompson;kin;kin@example.com
-"Johnert";"Griesemer";"gri";gri@example.com
-Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
-`
-	compare := `username;email
-gri;gri@example.com
-jonatasdp;jonatasdp@gmail.com
-jonatasdp;jonatasdp@gmail.com
-jonatasdp;jonatasdp@gmail.com
-john;john@example.com
-jonatasdp;jonatasdp@gmail.com
-jonatasdp;jonatasdp@gmail.com
-`
-	a := emailsFrom(in)
-	b := emailsFrom(compare)
-	fmt.Println(intersect([]string{}, b, a))
-
-}
-
 func emailsFrom(in string) []string {
 	r := csv.NewReader(strings.NewReader(in))
 	r.Comma = ';'
@@ -85,4 +56,33 @@ func exists(a string, list []string) bool {
 		}
 	}
 	return false
+}
+
+func testIntersect() {
+	in := `first_name;last_name;username;email
+"John";"Pike";john;john@example.com
+Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
+Kin;Thompson;kin;kin@example.com
+Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
+"John";"Pike";john;john@example.com
+Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
+Kin;Thompson;kin;kin@example.com
+"John";"Pike";john;john@example.com
+Kin;Thompson;kin;kin@example.com
+"Johnert";"Griesemer";"gri";gri@example.com
+Jônatas;Paganini;jonatasdp;jonatasdp@gmail.com
+`
+	compare := `username;email
+gri;gri@example.com
+jonatasdp;jonatasdp@gmail.com
+jonatasdp;jonatasdp@gmail.com
+jonatasdp;jonatasdp@gmail.com
+john;john@example.com
+jonatasdp;jonatasdp@gmail.com
+jonatasdp;jonatasdp@gmail.com
+`
+	a := emailsFrom(in)
+	b := emailsFrom(compare)
+	fmt.Println(intersect([]string{}, b, a))
+
 }
